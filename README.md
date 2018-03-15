@@ -1,160 +1,120 @@
-# Quantified Self Webpack
+<p align="center">
+  <img src="https://img0.etsystatic.com/187/0/15439563/il_340x270.1246801852_acfh.jpg" alt="Quantified Self logo"/>
+</p>
 
-To get you started building your Quantified Self app.
 
-## Initial Setup
 
-One person from your project will set up the repository. That one person should follow these steps:
+# Quantified Self
 
-1. Clone this starter kit repository and rename the repository to `quantified-self` in one command
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](http://forthebadge.com)
 
-  ```shell
-  git clone git@github.com:turingschool-examples/quantified-self-starter-kit.git quantified-self
-  ```
 
-2. Change into the `quantified-self` directory
+A platform to allow users to track calories and stay aware of their current health targets. The front end is built with JavaScript, JQuery, HTML and CSS and hosted with Github Pages. Users are able to store their favorites foods, associate them with meals and track their total calories over a typical meal cycle. 
 
-3. Remove the default remote (origin)
 
-  ```shell
-  git remote rm origin
-  ```
+View the front end in productiion [here](https://nico24687.github.io/quantified-self/)
+The backend can be found ...
+For details on the projects specifications click [here](http://backend.turing.io/module4/projects/quantified-self/quantified-self)
 
-4. Create a new repository on GitHub named `quantified-self`
+## Getting Started
 
-5. Add your new repository remote - **your remote URL and user name will be different in the command below**
+1) Clone the repo
 
-  ```shell
-  git remote add origin git@github.com:neight-allen/quantified-self.git
-  ```
+```
+git clone https://github.com/nico24687/quantified-self.git
+```
 
-6. Install the dependencies of the starter kit
+2) Navigate to the quantified-self directory
 
-  ```shell
-  npm install
-  ```
+```
+cd quantified-self
+```
 
-7. Add, commit, and push up to your repository
+3) Install the dependencies
 
-  ```shell
-  git add .
-  git commit -m "Initial commit using starter kit"
-  git push origin master
-  ```
+```
+npm install
+```
 
-8. Now add your team member(s) as collaborators to the repository. They can now clone down your `quantified-self` repository as normal.
+4) Start the Server
 
-9. Once each partner clones down the repo, they need to run `npm install` to install the dependencies on their machine.
-
-## Github Pages setup
-
-1. Visit your repository on Github
-
-2. Go to Settings
-
-3. Under the Github Pages section of Options, select 'master' as your source
-
-Be sure to `npm run build` and commit before each push to master. A few seconds after you push up, you should be able to see your application at <https://your-github-username.github.io/quantified-self>.
-
-## Run the Server
-
-To see your code in action, you need to fire up a development server. Use the command:
-
-```shell
+```
 npm start
 ```
 
-Once the server is running, visit in your browser:
+With a running server, navigate to the correct localhost port and begin interacting with the application in your browser
 
-* `http://localhost:8080/webpack-dev-server/` to run your application.
-* `http://localhost:8080/webpack-dev-server/test.html` to run your test suite in the browser.
 
-To build the static files. This must be done before committing and pushing if you want your site to work at github.io:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-```js
-npm run build
-```
+### API
 
-## Run Tests in the Terminal
+The API follows RESTful conventions and returns responses in JSON.
 
-To run all of your tests:
+The base url is hosted with heroku at https://dry-retreat-71730.herokuapp.com
+Requests must adhere to case sensitvity
 
-```js
-npm test
-```
+The following endpoints are available
 
-## File Organization
+### Food Enpoints
 
-Webpack is a little opinionated about how files are organized. Here is a brief guide on how to organize development and test files.
+GET /api/v1/foods - returns all foods currently in the database
 
-### Development Files
+GET /api/v1/foods/:id - returns the food object with the specific :id you've passed in or 404 if the food is not found
 
-Node and webpack work together to help us organize our files and keep responsibilities separated.
+POST /api/v1/foods - allows creating a new food with the parameters:
+{ food: { name: "Name of food here", calories: "Calories here"} }
+If food is successfully created, the food item will be returned. If the food is not successfully created, a 400 status code will be returned. Both name and calories are required fields.
 
-For example, if we have the `lib/index.js` file and a `lib/food.js` file:
+PATCH /api/v1/foods/:id - allows one to update an existing food with the parameters:
+{ food: { name: "Name of food here", calories: "Calories here"} }
+If food is successfully updated (name and calories are required fields), the food item will be returned. If the food is not successfully updated, a 400 status code will be returned.
 
-**lib/index.js**
+DELETE /api/v1/foods/:id - will delete the food with the id passed in. If the food can't be found, a 404 will be returned.
 
-```javascript
-var Food = require('./food');
 
-var someFood = new Food();
-```
+### Meal Enpoints
 
-**lib/food.js**
+GET /api/v1/meals - returns all the meals in the database along with their associated foods
 
-```javascript
-function Food(food, calories) {
-  this.name = name;
-  this.calories = calories;
-}
+GET /api/v1/meals/:meal_id/foods - returns all the foods associated with the meal with an id specified by :meal_id or a 404 if the meal is not found
 
-Food.prototype.edit = function () {
-  //Some cool storage stuff here
-};
+POST /api/v1/meals/:meal_id/foods/:id - adds the food with :id to the meal with :meal_id
+This creates a new record in the MealFoods table to establish the relationship between this food and meal. If the meal/food cannot be found, a 404 will be returned.
 
-module.exports = Food;
-```
+DELETE /api/v1/meals/:meal_id/foods/:id
 
-All of the `food.js` code could live in the `index.js` file, but that would go against our philosophy of separating responsibility between files.
+## Contributing
 
-There are two main things to pay attention to here:
+We always welcome contributions from the community. Contributions can be made by pull request workflow. For best practices around this please see [GitHub documentation - Creating a pull request](https://help.github.com/articles/creating-a-pull-request/).
 
-1. At the top of the `index.js` file, we require the `food.js` file using the line of code `var Food = require('./food');` (we leave out the `.js`). This brings in the code from the `food.js` file so we can use that file's code in the `index.js` file.
+We ask that you provide the following in a pull request
 
-2. In the `food.js` file, the bottom line says `module.exports = Food;` which says what we want this file to export when we say `require` in other files, like in `index.js`.
+1. A clear description of your pull request in the description
+   with the main points covered.
+2. All tests should pass.
+3. Tests should cover any additional functionality. And bugs should demonstrate a failing and passing test after changes have been made. Run `npm run test-cov` to visit an html respresentation of the current code coverage
+4. New pull requests with additional features should include appropriate documentation in the `README.md`
 
-So now we have two files that can share code between each other, but we have to pay attention to what we export and what we require. If we didn't do this, then when we try to make a new Food in the `index.js` file, it won't know what Food we're talking about!
+## Built With
 
-### Test Files
+* [jQuery](https://jquery.com/) 
+* [Bootstrap](https://github.com/twbs/bootstrap-rubygem) 
+* [Node.js](https://nodejs.org/en/) 
 
-Near the end of quantified self, you will have multiple objects for your project that are tested separately with individual test files. The `test/index.js` file serves as an "entry point" for mocha to load all of the tests you write.
 
-Test file organization is a bit different from development files. If we want to test the `food.js` file from above, then this is how we would do it. For each object file (in this case `food.js`), we want to have a corresponding test file. So in the `test` directory, we would create a new file called `test/food-test.js`. Here is what that file would look like:
+## Versioning
 
-**test/food-test.js**
+Version 1.0
 
-```javascript
-var chai = require('chai');
-var assert = chai.assert;
+## Authors
 
-var Food = require('../lib/food');
+* **Nico Lewis** [contact](https://github.com/nico24687)
+* **Young Jung** [contact](https://github.com/seoulstice)
 
-describe('Food', function() {
-  context('can create a new food', function() {
-    // Your tests here...  
-  });  
-});
-```
 
-**test/index.js**
+## License
 
-```javascript
-require('./food-test')
-```
-
-Two main points to pay attention to:
-
-1. In the `food-test.js` file, we require the `food.js` file so that we can construct foods in our tests.
-
-2. In the `test/index.js` file, we require the `food-test.js` file so that we can view the test results in the browser (at `http://localhost:8080/webpack-dev-server/test.html`). But most of the time, you'll just run your tests in the terminal with `npm test`
+This project is licensed under the MIT License 
