@@ -125,6 +125,38 @@
 	  });
 	});
 
+	var deleteFood = function deleteFood(id) {
+	  return fetch('https://dry-retreat-71730.herokuapp.com/api/v1/foods/' + id, {
+	    method: 'DELETE',
+	    headers: { 'Content-Type': 'application/json' }
+	  });
+	};
+
+	$(".food-list").on("click", ".delete-food", function (event) {
+	  deleteFood(event.currentTarget.parentElement.parentElement.dataset.id).then(function () {
+	    event.currentTarget.parentElement.parentElement.hidden = true;
+	  });
+	});
+
+	var updateFoodName = function updateFoodName(id, name) {
+	  var updatedFood = { food: { name: name } };
+	  return fetch('https://dry-retreat-71730.herokuapp.com/api/v1/foods/' + id, {
+	    method: 'PATCH',
+	    headers: { 'Content-Type': 'application/json' },
+	    body: JSON.stringify(updatedFood)
+	  }).then(function (response) {
+	    return response.json();
+	  }).then(function (rawFood) {
+	    return new Food(rawFood.id, rawFood.name, rawFood.calories);
+	  });
+	};
+
+	$('.search-food-form .search .form-control').on("keyup", function (event) {
+	  $(".food-list .food .name").each(function (index, food) {
+	    food.parentElement.hidden = food.innerText.toLowerCase().indexOf(event.target.value.toLowerCase()) === -1;
+	  });
+	});
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
