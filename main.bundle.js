@@ -49,12 +49,6 @@
 	var $ = __webpack_require__(1);
 	var Food = __webpack_require__(2);
 
-	var toFoodArray = function toFoodArray(allFoodJson) {
-	  return allFoodJson.map(function (food) {
-	    return new Food(food.id, food.name, food.calories);
-	  });
-	};
-
 	var buildFoodRow = function buildFoodRow(food) {
 	  var foodNode = $('<td class="name">' + food.name + '</td>');
 	  var caloriesNode = $('<td>' + food.calories + '</td>');
@@ -71,19 +65,45 @@
 	  return rowNode;
 	};
 
-	$(document).ready(function () {
+	var getFoods = function getFoods() {
 	  fetch("https://dry-retreat-71730.herokuapp.com/api/v1/foods").then(function (response) {
 	    return response.json();
 	  }).then(function (rawFood) {
-	    return toFoodArray(rawFood).reverse();
-	  }).then(function (food) {
-	    food.forEach(function (currentFood) {
+	    rawFood.reverse().forEach(function (currentFood) {
 	      $('.food-list tbody').append(buildFoodRow(currentFood));
 	    });
 	  }).catch(function (error) {
-	    return console.log(error);
+	    return console.error({ error: error });
 	  });
-	});
+	};
+
+	var buildMealFoodRow = function buildMealFoodRow(food) {
+	  var foodNode = $('<td class="name">' + food.name + '</td>');
+	  var caloriesNode = $('<td>' + food.calories + '</td>');
+	  var checkNode = $('<td><input type="checkbox"></td>');
+
+	  var rowNode = $('<tr class="food" data-id="' + food.id + '"></tr>').append(foodNode).append(caloriesNode).append(checkNode);
+
+	  foodNode.prop("contentEditable", true);
+	  caloriesNode.prop("contentEditable", true);
+
+	  foodNode.on("blur", function (event) {
+	    updateFoodName(event.target.parentElement.dataset.id, event.target.innerText);
+	  });
+	  return rowNode;
+	};
+
+	var getMealFoods = function getMealFoods() {
+	  fetch("https://dry-retreat-71730.herokuapp.com/api/v1/foods").then(function (response) {
+	    return response.json();
+	  }).then(function (rawFood) {
+	    rawFood.reverse().forEach(function (currentFood) {
+	      $('.meal-food-list tbody').append(buildMealFoodRow(currentFood));
+	    });
+	  }).catch(function (error) {
+	    return console.error({ error: error });
+	  });
+	};
 
 	var postFood = function postFood(name, calories) {
 	  var newFood = { food: { name: name, calories: calories } };
@@ -156,6 +176,9 @@
 	    food.parentElement.hidden = food.innerText.toLowerCase().indexOf(event.target.value.toLowerCase()) === -1;
 	  });
 	});
+
+	getFoods();
+	getMealFoods();
 
 /***/ }),
 /* 1 */
@@ -10532,16 +10555,6 @@
 /***/ (function(module, exports) {
 
 	"use strict";
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	module.exports = function Food(id, name, calories) {
-	  _classCallCheck(this, Food);
-
-	  this.id = id;
-	  this.name = name;
-	  this.calories = calories;
-	};
 
 /***/ })
 /******/ ]);
