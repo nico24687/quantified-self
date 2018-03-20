@@ -7,7 +7,7 @@
     crossorigin="anonymous">
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 </head>
-<body>
+<body id="meal">
 
   <div class="container meals"></div>
 
@@ -41,17 +41,32 @@
   <div class="container">
     <h6>Add selected food to</h6>
     <div class="add-to-meal"></div>
+    <a class="btn btn-success"href="foods.html">Create New</a>
+  </div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <form class="search-food-form">
+          <div class="form-group search">
+            <label for="search">Search by Name</label>
+            <input type="text" class="form-control" id="search" placeholder=" e.g. Twinkie">
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
         <h2>Foods</h2>
-        <table class="table meal-food-list">
+        <table class="table food-list">
           <thead>
             <tr>
               <th scope="col">Name</th>
-              <th scope="col">Calories</th>
+              <th scope="col" class="calories-header">Calories</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -63,6 +78,8 @@
       </div>
     </div>
   </div>
+
+
 
 
 
