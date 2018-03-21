@@ -14,8 +14,8 @@
 A platform to allow users to track calories and stay aware of their current health targets. The front end is built with JavaScript, JQuery, HTML and CSS and hosted with Github Pages. Users are able to store their favorites foods, associate them with meals and track their total calories over a typical meal cycle. 
 
 
-View the front end in productiion [here](https://nico24687.github.io/quantified-self/)
-The backend can be found ...
+View the front end in productiion [here](https://nico24687.github.io/quantified-self/).
+The express backend can be found [here](https://github.com/nico24687/express-qs/tree/master).
 For details on the projects specifications click [here](http://backend.turing.io/module4/projects/quantified-self/quantified-self)
 
 ## Getting Started
