@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Quantified Self - Diary</title>
@@ -7,7 +7,7 @@
     crossorigin="anonymous">
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 </head>
-<body id="meal">
+<body id="meal" role="main">
 
   <div class="container meals"></div>
 
@@ -26,7 +26,7 @@
             </tr>
           </thead>
           <tbody>
-            <td class="goal"></td>
+            <td class="goal">2000</td>
             <td class="calories-consumed"></td>
             <td class="total-remaining-calories"></td>
           </tbody>
@@ -39,11 +39,19 @@
 
 
   <div class="container">
-    <h6>Add selected food to</h6>
+    <h2>Add selection</h2>
+    <p>Choose a food from the list below then add it to a meal</p>
     <div class="add-to-meal"></div>
-    <a class="btn btn-success"href="foods.html">Create New</a>
   </div>
 
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <p></p>
+      </div>
+    </div>
+  </div>
 
   <div class="container">
     <div class="row">
@@ -52,6 +60,7 @@
           <div class="form-group search">
             <label for="search">Search by Name</label>
             <input type="text" class="form-control" id="search" placeholder=" e.g. Twinkie">
+            <a style="margin-top: 10px;" class="btn btn-default" href="foods.html">New food</a>
           </div>
         </form>
       </div>
@@ -66,7 +75,7 @@
           <thead>
             <tr>
               <th scope="col">Name</th>
-              <th scope="col" class="calories-header" data-sort-order="default">Calories</th>
+              <th scope="col" class="calories-header">Calories</th>
               <th scope="col"></th>
             </tr>
           </thead>
