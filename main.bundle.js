@@ -10608,7 +10608,7 @@
 	  _createClass(Api, [{
 	    key: "getAllFood",
 	    value: function getAllFood() {
-	      return fetch("https://dry-retreat-71730.herokuapp.com/api/v1/foods").then(function (response) {
+	      return fetch("https://express-qs.herokuapp.com/api/v1/foods").then(function (response) {
 	        return response.json();
 	      });
 	    }
@@ -10617,7 +10617,7 @@
 	    value: function createFood(name, calories) {
 	      var newFood = { food: { name: name, calories: calories } };
 
-	      return fetch("https://dry-retreat-71730.herokuapp.com/api/v1/foods", {
+	      return fetch("https://express-qs.herokuapp.com/api/v1/foods", {
 	        method: 'POST',
 	        body: JSON.stringify(newFood),
 	        headers: {
@@ -10630,7 +10630,7 @@
 	  }, {
 	    key: "deleteFood",
 	    value: function deleteFood(id) {
-	      return fetch("https://dry-retreat-71730.herokuapp.com/api/v1/foods/" + id, {
+	      return fetch("https://express-qs.herokuapp.com/api/v1/foods/" + id, {
 	        method: 'DELETE',
 	        headers: { 'Content-Type': 'application/json' }
 	      });
@@ -10639,7 +10639,7 @@
 	    key: "updateFoodName",
 	    value: function updateFoodName(id, name) {
 	      var updatedFood = { food: { name: name } };
-	      return fetch("https://dry-retreat-71730.herokuapp.com/api/v1/foods/" + id, {
+	      return fetch("https://express-qs.herokuapp.com/api/v1/foods/" + id, {
 	        method: 'PATCH',
 	        headers: { 'Content-Type': 'application/json' },
 	        body: JSON.stringify(updatedFood)
@@ -10651,7 +10651,7 @@
 	    key: "updateFoodCalories",
 	    value: function updateFoodCalories(id, calories) {
 	      var updatedFood = { food: { calories: calories } };
-	      return fetch("https://dry-retreat-71730.herokuapp.com/api/v1/foods/" + id, {
+	      return fetch("https://express-qs.herokuapp.com/api/v1/foods/" + id, {
 	        method: 'PATCH',
 	        headers: { 'Content-Type': 'application/json' },
 	        body: JSON.stringify(updatedFood)
@@ -10662,7 +10662,7 @@
 	  }, {
 	    key: "addFoodToMeal",
 	    value: function addFoodToMeal(mealId, foodId) {
-	      return fetch("https://dry-retreat-71730.herokuapp.com/api/v1/meals/" + mealId + "/foods/" + foodId, {
+	      return fetch("https://express-qs.herokuapp.com/api/v1/meals/" + mealId + "/foods/" + foodId, {
 	        method: 'POST',
 	        headers: { 'Content-Type': 'application/json' }
 	      });
@@ -10670,14 +10670,14 @@
 	  }, {
 	    key: "getMeals",
 	    value: function getMeals() {
-	      return fetch('https://dry-retreat-71730.herokuapp.com/api/v1/meals').then(function (response) {
+	      return fetch('https://express-qs.herokuapp.com/api/v1/meals').then(function (response) {
 	        return response.json();
 	      });
 	    }
 	  }, {
 	    key: "deleteFoodFromMeal",
 	    value: function deleteFoodFromMeal(mealId, foodId) {
-	      return fetch("https://dry-retreat-71730.herokuapp.com/api/v1/meals/" + mealId + "/foods/" + foodId, {
+	      return fetch("https://express-qs.herokuapp.com/api/v1/meals/" + mealId + "/foods/" + foodId, {
 	        method: 'DELETE',
 	        headers: { 'Content-Type': "application/json" }
 	      });
