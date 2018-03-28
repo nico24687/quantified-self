@@ -75,7 +75,7 @@ If food is successfully updated (name and calories are required fields), the foo
 DELETE /api/v1/foods/:id - will delete the food with the id passed in. If the food can't be found, a 404 will be returned.
 
 
-### Meal Enpoints
+### Meal Endpoints
 
 GET /api/v1/meals - returns all the meals in the database along with their associated foods
 
