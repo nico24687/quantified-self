@@ -61,11 +61,11 @@
 	  caloriesNode.prop("contentEditable", true);
 
 	  nameNode.on("blur", function (event) {
-	    Api.updateFoodName(event.target.parentElement.dataset.id, event.target.innerText);
+	    Api.updateFood(event.target.parentElement.dataset.id, $(event.target.parentElement).find(".name").text(), $(event.target.parentElement).find(".calories").text());
 	  });
 
 	  caloriesNode.on("blur", function (event) {
-	    Api.updateFoodCalories(event.target.parentElement.dataset.id, event.target.innerText);
+	    Api.updateFood(event.target.parentElement.dataset.id, $(event.target.parentElement).find(".name").text(), $(event.target.parentElement).find(".calories").text());
 	  });
 
 	  return rowNode;
@@ -10568,10 +10568,10 @@
 	  caloriesNode.prop("contentEditable", true);
 
 	  foodNode.on("blur", function (event) {
-	    Api.updateFoodName(event.target.parentElement.dataset.id, event.target.innerText);
+	    Api.updateFood(event.target.parentElement.dataset.id, $(event.target.parentElement).find(".name").text(), $(event.target.parentElement).find(".calories").text());
 	  });
 	  caloriesNode.on("blur", function (event) {
-	    Api.updateFoodCalories(event.target.parentElement.dataset.id, event.target.innerText);
+	    Api.updateFood(event.target.parentElement.dataset.id, $(event.target.parentElement).find(".name").text(), $(event.target.parentElement).find(".calories").text());
 	  });
 	  return rowNode;
 	};
@@ -10636,29 +10636,38 @@
 	      });
 	    }
 	  }, {
-	    key: "updateFoodName",
-	    value: function updateFoodName(id, name) {
-	      var updatedFood = { food: { name: name } };
+	    key: "updateFood",
+	    value: function updateFood(id, name, calories) {
+	      var updatedFood = { food: { name: name, calories: calories } };
 	      return fetch("https://express-qs.herokuapp.com/api/v1/foods/" + id, {
-	        method: 'PATCH',
+	        method: 'PUT',
 	        headers: { 'Content-Type': 'application/json' },
 	        body: JSON.stringify(updatedFood)
 	      }).then(function (response) {
 	        return response.json();
 	      });
 	    }
-	  }, {
-	    key: "updateFoodCalories",
-	    value: function updateFoodCalories(id, calories) {
-	      var updatedFood = { food: { calories: calories } };
-	      return fetch("https://express-qs.herokuapp.com/api/v1/foods/" + id, {
-	        method: 'PATCH',
-	        headers: { 'Content-Type': 'application/json' },
-	        body: JSON.stringify(updatedFood)
-	      }).then(function (response) {
-	        return response.json();
-	      });
-	    }
+
+	    // updateFoodName(id, name) {
+	    //   const updatedFood = { food: { name: name } };
+	    //   return fetch(`https://express-qs.herokuapp.com/api/v1/foods/${id}`, {
+	    //     method: 'PATCH',
+	    //     headers: { 'Content-Type': 'application/json' },
+	    //     body: JSON.stringify(updatedFood)
+	    //   })
+	    //     .then(response => response.json())
+	    // }
+
+	    // updateFoodCalories(id, calories) {
+	    //   const updatedFood = { food: { calories: calories } };
+	    //   return fetch(`https://express-qs.herokuapp.com/api/v1/foods/${id}`, {
+	    //     method: 'PATCH',
+	    //     headers: { 'Content-Type': 'application/json' },
+	    //     body: JSON.stringify(updatedFood)
+	    //   })
+	    //     .then(response => response.json())
+	    // }
+
 	  }, {
 	    key: "addFoodToMeal",
 	    value: function addFoodToMeal(mealId, foodId) {
@@ -10865,10 +10874,10 @@
 	  caloriesNode.prop("contentEditable", true);
 
 	  foodNode.on("blur", function (event) {
-	    Api.updateFoodName(event.target.parentElement.dataset.id, event.target.innerText);
+	    Api.updateFood(event.target.parentElement.dataset.id, $(event.target.parentElement).find(".name").text(), $(event.target.parentElement).find(".calories").text());
 	  });
 	  caloriesNode.on("blur", function (event) {
-	    Api.updateFoodCalories(event.target.parentElement.dataset.id, event.target.innerText);
+	    Api.updateFood(event.target.parentElement.dataset.id, $(event.target.parentElement).find(".name").text(), $(event.target.parentElement).find(".calories").text());
 	  });
 	};
 
